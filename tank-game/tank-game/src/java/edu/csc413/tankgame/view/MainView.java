@@ -1,5 +1,4 @@
 package edu.csc413.tankgame.view;
-
 import edu.csc413.tankgame.model.GameState;
 import edu.csc413.tankgame.model.Tank;
 import javax.swing.*;
@@ -13,7 +12,14 @@ import java.awt.event.WindowEvent;
  * and RunGameView classes). MainView can be interacted with to set which of those screens is currently showing, and it
  * is also registered to listen for keyboard events.
  */
-public class MainView {
+public class MainView  {
+
+    public static boolean pressUp = false;
+    public static boolean pressDown = false;
+    public static boolean pressRight = false;
+    public static boolean pressLeft = false;
+    public static boolean shoot = false;
+
     /** The different screens that can be shown. */
     public enum Screen {
         START_MENU_SCREEN("start"),
@@ -40,7 +46,7 @@ public class MainView {
     // MainView is responsible for assigning listeners to various UI components (like buttons and keyboard input).
     // However, we want to return control to GameDriver when those events happen. How can we have listeners that directs
     // us back to the code in GameDriver?
-    public MainView()  {
+    public MainView()   {
         mainJFrame = new JFrame();
         mainJFrame.setVisible(false);
         mainJFrame.setResizable(false);
@@ -49,26 +55,8 @@ public class MainView {
         mainJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //TODOOOO
 
+        mainJFrame.addKeyListener(listeners);
 
-//        KeyListener listener = new KeyListener() {
-//            @Override
-//            public void keyTyped(KeyEvent e) {
-//
-//            }
-//
-//            @Override
-//            public void keyPressed(KeyEvent e) {
-//
-//            }
-//
-//            @Override
-//            public void keyReleased(KeyEvent e) {
-//
-//            }
-//        };
-
-        KeyListener listener = new PrintListener();
-        mainJFrame.addKeyListener(listener);
         //mainPanel has three different views that can be swapped out
         mainPanel = new JPanel();
         mainPanelLayout = new CardLayout();
@@ -87,56 +75,48 @@ public class MainView {
     }
 
 
-    private static class PrintListener implements KeyListener {
-        private Tank tank1;
-//        private final int moveUp;
-//        private final int moveDown;
-//        private final int rightSide;
-//        private final int leftSide;
+    //private static class PrintListener implements KeyListener {
 
-        public PrintListener(Tank tank1) {
-            this.tank1 = tank1;
-//            this.moveUp = moveUp;
-//            this.moveDown = moveDown;
-//            this.rightSide = rightSide;
-//            this.leftSide = leftSide;
-        }
-
-        public PrintListener() {
-
-        }
-
+        KeyListener listeners = new KeyListener()  {
 
         @Override
-        public void keyTyped(KeyEvent e) {
+        public void keyTyped (KeyEvent event){
         }
 
         @Override
-        public void keyPressed(KeyEvent event) {
+        public void keyPressed (KeyEvent event){
             int key = event.getKeyCode();
-            if (key == KeyEvent.VK_UP) {
-                tank1.ClickPressUp();
-            } else if (key == KeyEvent.VK_DOWN) {
-                tank1.ClickPressDown();
-            } else if (key == KeyEvent.VK_RIGHT) {
-                tank1.ClickPressRight();
-            } else if (key == KeyEvent.VK_LEFT) {
-                tank1.ClickPressLeft();
-            } else if (key == KeyEvent.VK_ESCAPE) {
-                tank1.ClickPressEscape();
+            if (key == KeyEvent.VK_W) {
+                pressUp = true;
+            } else if (key == KeyEvent.VK_S) {
+                pressDown = true;
+            } else if (key == KeyEvent.VK_D) {
+                pressRight = true;
+            } else if (key == KeyEvent.VK_A) {
+                pressLeft = true;
+            } else if(key == KeyEvent.VK_ESCAPE){
+                System.exit(0);
+            } else if(key == KeyEvent.VK_SPACE){
+                shoot = true;
             }
         }
 
         @Override
-        public void keyReleased(KeyEvent event) {
+        public void keyReleased (KeyEvent event){
             int key = event.getKeyCode();
-            if (key == KeyEvent.VK_UP) {
-
+            if (key == KeyEvent.VK_W) {
+                pressUp = false;
+            }else if(key == KeyEvent.VK_S){
+                pressDown = false;
+            }else if(key == KeyEvent.VK_D){
+                pressRight = false;
+            }else if(key == KeyEvent.VK_A){
+                pressLeft = false;
+            }else if(key == KeyEvent.VK_SPACE){
+                shoot = false;
             }
         }
-    }
-
-
+    };
 
     /**
      * Returns the contained RunGameView. This method provides the GameDriver with direct access, which is needed for

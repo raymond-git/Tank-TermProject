@@ -1,15 +1,7 @@
 package edu.csc413.tankgame;
-import edu.csc413.tankgame.model.DumbAiTank;
-import edu.csc413.tankgame.model.GameState;
-import edu.csc413.tankgame.model.PlayerTank;
-import edu.csc413.tankgame.model.Tank;
+import edu.csc413.tankgame.model.*;
 import edu.csc413.tankgame.view.MainView;
 import edu.csc413.tankgame.view.RunGameView;
-import edu.csc413.tankgame.view.StartMenuView;
-import javax.print.event.PrintJobListener;
-import javax.swing.*;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
 
 /**
@@ -21,9 +13,13 @@ public class GameDriver {
     // Add the instance variables, constructors, and other methods needed for this class. GameDriver is the centerpiece
     // for the tank game, and should store and manage the other components (i.e. the views and the models). It also is
     // responsible for running the game loop.
-    private final MainView mainView;
-    private final RunGameView runGameView;
-    private final GameState gameState;
+//    private final MainView mainView;
+//    private final RunGameView runGameView;
+//    private final GameState gameState;
+
+    private static MainView mainView;
+    private static RunGameView runGameView;
+    private static GameState gameState;
 
     public GameDriver() {
         mainView = new MainView();
@@ -31,21 +27,17 @@ public class GameDriver {
         gameState = new GameState();
     }
 
-    public void start() {
+    public static void start() {
         // TODO: Implement.
-        // This should set the MainView's screen to the start menu screen.
-
-
-    mainView.setScreen(MainView.Screen.START_MENU_SCREEN);
-
-    StartMenuView button1 = new StartMenuView(StartMenuView.START_BUTTON_ACTION_COMMAND);
-    if (button1.equal()) {
-        mainView.setScreen(MainView.Screen.RUN_GAME_SCREEN);
-        runGame();
-          }
+        mainView.setScreen(MainView.Screen.START_MENU_SCREEN);
     }
 
-    private void runGame(){
+    public static void RunGameScreen() {
+        mainView.setScreen(MainView.Screen.RUN_GAME_SCREEN);
+        runGame();
+    }
+
+    private static void runGame(){
        Tank playerTank =
                new PlayerTank(
                        GameState.PLAYER_TANK_ID,
@@ -62,8 +54,8 @@ public class GameDriver {
                        RunGameView.AI_TANK_INITIAL_ANGLE) {
                };
 
-       gameState.addTank(playerTank);
-       gameState.addTank(aiTank);
+       gameState.addEntity(playerTank);
+       gameState.addEntity(aiTank);
 
         runGameView.addDrawableEntity(
                 GameState.PLAYER_TANK_ID,
@@ -93,21 +85,20 @@ public class GameDriver {
     // TODO: Implement.
     // update should handle one frame of gameplay. All tanks and shells move one step, and all drawn entities
     // should be updated accordingly. It should return true as long as the game continues.
-    private boolean update() {
+    private static boolean update() {
         //Ask all tanks, shells, etc to move
-        for(Tank tank: gameState.getTanks()){
-            tank.move(gameState);
+        for(Entity entity: gameState.getEntities()){
+            entity.move(gameState);
         }
         //Ask all tanks, shells, etc to check bounds
 
         //Check collisions
         //for(everything in the game that is drawn){
-        for(Tank tank: gameState.getTanks()){
-            runGameView.setDrawableEntityLocationAndAngle(tank.getId(), tank.getX(), tank.getY(), tank.getAngle());
+        for(Entity entity: gameState.getEntities()){
+            runGameView.setDrawableEntityLocationAndAngle(entity.getId(), entity.getX(), entity.getY(), entity.getAngle());
         }
         return true;
     }
-
 
     public static void main(String[] args) {
         GameDriver gameDriver = new GameDriver();

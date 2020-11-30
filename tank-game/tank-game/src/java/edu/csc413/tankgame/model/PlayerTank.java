@@ -1,48 +1,26 @@
 package edu.csc413.tankgame.model;
+import edu.csc413.tankgame.view.MainView;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 
-public class PlayerTank extends Tank{
-    public PlayerTank(String id, double x, double y, double angle){
+public class PlayerTank extends Tank {
+    public PlayerTank(String id, double x, double y, double angle) {
         super(id, x, y, angle);
-}
-@Override
-    public void move(GameState gamestate){
+    }
 
-        if(gamestate.ClickPressUp()){
+    public void move(GameState gamestate) {
+        if (MainView.pressUp) {
             moveForward();
-        }else if(gamestate.ClickPressDown()){
+        } else if (MainView.pressDown) {
             moveBackward();
-        }else if(gamestate.ClickPressRight()){
+        } else if (MainView.pressRight) {
             turnRight();
-        }else if(gamestate.ClickPressLeft()){
+        } else if (MainView.pressLeft) {
             turnLeft();
+        } else if(MainView.shoot){
+            //tryToFire(Shell);
         }
     }
 
-    @Override
-    public void ClickPressUp() {
 
-    }
-
-    @Override
-    public void ClickPressDown() {
-
-    }
-
-    @Override
-    public void ClickPressRight() {
-
-    }
-
-    @Override
-    public void ClickPressLeft() {
-
-    }
-
-    @Override
-    public void ClickPressEscape() {
-
-    }
 }

@@ -1,5 +1,4 @@
 package edu.csc413.tankgame.view;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;

@@ -1,7 +1,5 @@
 package edu.csc413.tankgame.view;
-
 import edu.csc413.tankgame.GameDriver;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -34,8 +32,12 @@ public class StartMenuView extends JPanel {
 
     public static final String START_BUTTON_ACTION_COMMAND = "start_ac";
     public static final String EXIT_BUTTON_ACTION_COMMAND = "exit_ac";
+    public static boolean listener;
+
 
     private final BufferedImage menuBackground;
+
+
 
     // TODO: Implement.
     // You'll need to provide a way for GameDriver to respond to button presses in this view. Note that below, we add
@@ -57,12 +59,15 @@ public class StartMenuView extends JPanel {
         //start
         PrintListener listener = new PrintListener();
 
-
-
         //End
         //DON'T COPY THIS
         addButton(startButtonText, START_BUTTON_BOUNDS, START_BUTTON_ACTION_COMMAND, listener);
         addButton("Exit", EXIT_BUTTON_BOUNDS, EXIT_BUTTON_ACTION_COMMAND, listener);
+    }
+
+    private static volatile boolean update = false;
+    public static void stopGame(){
+        update = false;
     }
 
     private void addButton(String buttonText, Rectangle buttonBounds, String buttonActionCommand, ActionListener actionListener) {
@@ -85,14 +90,14 @@ public class StartMenuView extends JPanel {
         return true;
     }
 
-
     public class PrintListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event)  {
             String actionCommand = event.getActionCommand();
             if (actionCommand.equals(START_BUTTON_ACTION_COMMAND)) {
-                MainView screen = new MainView();
-                screen.setScreen(MainView.Screen.RUN_GAME_SCREEN);
+//                MainView screen = new MainView();
+//                screen.setScreen(MainView.Screen.RUN_GAME_SCREEN);
+                GameDriver.RunGameScreen();
             }else if(actionCommand.equals(EXIT_BUTTON_ACTION_COMMAND)){
                 System.exit(0);
             }

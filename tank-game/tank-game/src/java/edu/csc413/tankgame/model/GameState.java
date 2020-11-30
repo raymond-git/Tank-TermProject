@@ -1,6 +1,5 @@
 package edu.csc413.tankgame.model;
 
-import edu.csc413.tankgame.view.MainView;
 import edu.csc413.tankgame.view.RunGameView;
 
 import java.util.ArrayList;
@@ -30,57 +29,15 @@ public class GameState {
     // There's a lot of information the GameState will need to store to provide contextual information. Add whatever
     // instance variables, constructors, and methods are needed.
 
-    private final List<Tank> tanks = new ArrayList<>();
+    private final List<Entity> entities = new ArrayList<>();
 
-    public void addTank(Tank tank) {
-        tanks.add(tank);
+    public void addEntity(Entity tank) {
+        entities.add(tank);
     }
 
-    public List<Tank> getTanks() {
-        return tanks;
+    public List<Entity> getEntities() {
+        return entities;
     }
-
-    private boolean pressUp;
-    private boolean pressDown;
-    private boolean pressRight;
-    private boolean pressLeft;
-    private boolean update;
-//    private boolean escape;
-
-
-    public boolean ClickPressUp() {
-        if (this.pressUp) {
-        }
-        return true;
-    }
-
-    public boolean ClickPressDown() {
-        if (this.pressDown) {
-        }
-        return true;
-    }
-
-    public boolean ClickPressRight() {
-        if (this.pressRight) {
-        }
-        return true;
-    }
-
-    public boolean ClickPressLeft() {
-        if (this.pressLeft) {
-        }
-        return true;
-    }
-
-    public boolean ClickPressEscape() {
-        return false;
-    }
-
-//    public void Update() {
-//        if (this.pressUp) {
-//            this.moveForward();
-//        }
-//    }
 }
 
 
