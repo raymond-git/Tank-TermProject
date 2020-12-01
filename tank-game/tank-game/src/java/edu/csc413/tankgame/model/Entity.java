@@ -1,12 +1,10 @@
 package edu.csc413.tankgame.model;
 
 public abstract class Entity {
-
     private static final String SHELL_ID_PREFIX = "shell-";
     private static final double MOVEMENT_SPEED = 4.0;
-
-   // private static final double MOVEMENT_SPEED = 2.0;
-    private static final double TURN_SPEED = Math.toRadians(5);
+    // private static final double MOVEMENT_SPEED = 2.0;
+    private static final double TURN_SPEED = Math.toRadians(3);
     private final String id;
     private double x;
     private double y;
@@ -37,12 +35,10 @@ public abstract class Entity {
 
     public abstract void move(GameState gamestate);
 
-
     // TODO: The methods below are provided so you don't have to do the math for movement. However, note that they are
     // protected. You should not be calling these methods directly from outside the Tank class hierarchy. Instead,
     // consider how to design your Tank class(es) so that a Tank can represent both a player-controlled tank and an AI
     // controlled tank.
-
 
     protected void moveForward() {
         x += MOVEMENT_SPEED * Math.cos(this.angle);

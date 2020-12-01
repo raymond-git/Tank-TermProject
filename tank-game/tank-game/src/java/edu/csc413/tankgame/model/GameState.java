@@ -1,7 +1,6 @@
 package edu.csc413.tankgame.model;
 
 import edu.csc413.tankgame.view.RunGameView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +22,8 @@ public class GameState {
 
     public static final String PLAYER_TANK_ID = "player-tank";
     public static final String AI_TANK_ID = "ai-tank";
+    public static final String SHELL_ID = "shell";
+
     // TODO: Feel free to add more tank IDs if you want to support multiple AI tanks! Just make sure they're unique.
 
     // TODO: Implement.

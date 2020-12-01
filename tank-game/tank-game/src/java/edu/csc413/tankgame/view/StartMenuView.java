@@ -1,11 +1,11 @@
 package edu.csc413.tankgame.view;
+
 import edu.csc413.tankgame.GameDriver;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -14,7 +14,7 @@ import java.net.URL;
  * StartMenuView is the view representing the start menu screen as well as the end menu screen. The two menu screens are
  * extremely similar, as they only have one minor difference -- the text of the first button showing as "Start Game" vs
  * "Restart Game".
- *
+ * <p>
  * StartMenuView is responsible for setting up the start game and exit buttons and their corresponding listeners so that
  * clicking on the buttons will lead to the appropriate corresponding actions.
  */
@@ -34,10 +34,7 @@ public class StartMenuView extends JPanel {
     public static final String EXIT_BUTTON_ACTION_COMMAND = "exit_ac";
     public static boolean listener;
 
-
     private final BufferedImage menuBackground;
-
-
 
     // TODO: Implement.
     // You'll need to provide a way for GameDriver to respond to button presses in this view. Note that below, we add
@@ -56,18 +53,11 @@ public class StartMenuView extends JPanel {
 
         setBackground(Color.BLACK);
         setLayout(null);
-        //start
         PrintListener listener = new PrintListener();
-
         //End
         //DON'T COPY THIS
         addButton(startButtonText, START_BUTTON_BOUNDS, START_BUTTON_ACTION_COMMAND, listener);
         addButton("Exit", EXIT_BUTTON_BOUNDS, EXIT_BUTTON_ACTION_COMMAND, listener);
-    }
-
-    private static volatile boolean update = false;
-    public static void stopGame(){
-        update = false;
     }
 
     private void addButton(String buttonText, Rectangle buttonBounds, String buttonActionCommand, ActionListener actionListener) {
@@ -76,7 +66,6 @@ public class StartMenuView extends JPanel {
         button.setFont(BUTTON_FONT);
         button.setBounds(buttonBounds);
         button.setActionCommand(buttonActionCommand);
-        //make changes here
         button.addActionListener(actionListener);
         add(button);
     }
@@ -86,20 +75,14 @@ public class StartMenuView extends JPanel {
         g.drawImage(menuBackground, 0, 0, null);
     }
 
-    public boolean equal() {
-        return true;
-    }
-
     public class PrintListener implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent event)  {
+        public void actionPerformed(ActionEvent event) {
             String actionCommand = event.getActionCommand();
             if (actionCommand.equals(START_BUTTON_ACTION_COMMAND)) {
-//                MainView screen = new MainView();
-//                screen.setScreen(MainView.Screen.RUN_GAME_SCREEN);
                 GameDriver.RunGameScreen();
-            }else if(actionCommand.equals(EXIT_BUTTON_ACTION_COMMAND)){
-                System.exit(0);
+            } else if (actionCommand.equals(EXIT_BUTTON_ACTION_COMMAND)) {
+                GameDriver.EndGameScreen();
             }
         }
     }

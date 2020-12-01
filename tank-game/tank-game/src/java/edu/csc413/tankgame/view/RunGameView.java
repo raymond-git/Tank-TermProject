@@ -1,4 +1,5 @@
 package edu.csc413.tankgame.view;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -27,6 +28,9 @@ public class RunGameView extends JPanel {
     // different initial locations.
 
     public static final String SHELL_IMAGE_FILE = "shell.png";
+    public static final double SHELL_TANK_INITIAL_X = 750.0;
+    public static final double SHELL_TANK_INITIAL_Y = 750.0;
+    public static final double SHELL_TANK_INITIAL_Angle = 750.0;
 
     private final BufferedImage worldImage;
     private final Map<String, DrawableEntity> drawableEntitiesById = new HashMap<>();
@@ -36,7 +40,9 @@ public class RunGameView extends JPanel {
         setBackground(Color.BLACK);
     }
 
-    /** Clears the DrawableEntities map. This should be invoked if the game is reset. */
+    /**
+     * Clears the DrawableEntities map. This should be invoked if the game is reset.
+     */
     public void reset() {
         drawableEntitiesById.clear();
     }
@@ -61,7 +67,9 @@ public class RunGameView extends JPanel {
         drawableEntitiesById.remove(id);
     }
 
-    /** Updates the DrawableEntity with the provided ID to a new location and angle. */
+    /**
+     * Updates the DrawableEntity with the provided ID to a new location and angle.
+     */
     public void setDrawableEntityLocationAndAngle(String id, double x, double y, double angle) {
         drawableEntitiesById.get(id).setLocationAndAngle(x, y, angle);
     }
@@ -77,7 +85,6 @@ public class RunGameView extends JPanel {
         for (DrawableEntity drawableEntity : drawableEntitiesById.values()) {
             buffer.drawImage(drawableEntity.getEntityImage(), drawableEntity.getAffineTransform(), null);
         }
-
         g.drawImage(worldImage, 0, 0, null);
     }
 }

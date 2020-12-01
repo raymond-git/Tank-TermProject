@@ -1,6 +1,5 @@
 package edu.csc413.tankgame.view;
-import edu.csc413.tankgame.model.GameState;
-import edu.csc413.tankgame.model.Tank;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -12,15 +11,19 @@ import java.awt.event.WindowEvent;
  * and RunGameView classes). MainView can be interacted with to set which of those screens is currently showing, and it
  * is also registered to listen for keyboard events.
  */
-public class MainView  {
-
+public class MainView {
     public static boolean pressUp = false;
     public static boolean pressDown = false;
     public static boolean pressRight = false;
     public static boolean pressLeft = false;
     public static boolean shoot = false;
+    public static boolean readyToFire;
 
-    /** The different screens that can be shown. */
+    static Rectangle bullet;
+
+    /**
+     * The different screens that can be shown.
+     */
     public enum Screen {
         START_MENU_SCREEN("start"),
         RUN_GAME_SCREEN("game"),
@@ -46,17 +49,14 @@ public class MainView  {
     // MainView is responsible for assigning listeners to various UI components (like buttons and keyboard input).
     // However, we want to return control to GameDriver when those events happen. How can we have listeners that directs
     // us back to the code in GameDriver?
-    public MainView()   {
+    public MainView() {
         mainJFrame = new JFrame();
         mainJFrame.setVisible(false);
         mainJFrame.setResizable(false);
         mainJFrame.setTitle("Tank Wars");
         mainJFrame.setLocationRelativeTo(null);
         mainJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //TODOOOO
-
         mainJFrame.addKeyListener(listeners);
-
         //mainPanel has three different views that can be swapped out
         mainPanel = new JPanel();
         mainPanelLayout = new CardLayout();
@@ -74,17 +74,14 @@ public class MainView  {
         mainJFrame.add(mainPanel);
     }
 
-
-    //private static class PrintListener implements KeyListener {
-
-        KeyListener listeners = new KeyListener()  {
+    KeyListener listeners = new KeyListener() {
 
         @Override
-        public void keyTyped (KeyEvent event){
+        public void keyTyped(KeyEvent event) {
         }
 
         @Override
-        public void keyPressed (KeyEvent event){
+        public void keyPressed(KeyEvent event) {
             int key = event.getKeyCode();
             if (key == KeyEvent.VK_W) {
                 pressUp = true;
@@ -94,25 +91,33 @@ public class MainView  {
                 pressRight = true;
             } else if (key == KeyEvent.VK_A) {
                 pressLeft = true;
-            } else if(key == KeyEvent.VK_ESCAPE){
-                System.exit(0);
-            } else if(key == KeyEvent.VK_SPACE){
-                shoot = true;
+            } else if (key == KeyEvent.VK_ESCAPE) {
+                setScreen(MainView.Screen.END_MENU_SCREEN);
+            } else if (key == KeyEvent.VK_SPACE) {
+                if (bullet == null) {
+                    readyToFire = true;
+                    if (readyToFire) {
+//                    getBulletY = 0;
+//                    getBulletX = 0;
+//                    bullet = new Rectangle(getBulletX, getBulletY, 3, 5);
+                        shoot = true;
+                    }
+                }
             }
         }
 
         @Override
-        public void keyReleased (KeyEvent event){
+        public void keyReleased(KeyEvent event) {
             int key = event.getKeyCode();
             if (key == KeyEvent.VK_W) {
                 pressUp = false;
-            }else if(key == KeyEvent.VK_S){
+            } else if (key == KeyEvent.VK_S) {
                 pressDown = false;
-            }else if(key == KeyEvent.VK_D){
+            } else if (key == KeyEvent.VK_D) {
                 pressRight = false;
-            }else if(key == KeyEvent.VK_A){
+            } else if (key == KeyEvent.VK_A) {
                 pressLeft = false;
-            }else if(key == KeyEvent.VK_SPACE){
+            } else if (key == KeyEvent.VK_SPACE) {
                 shoot = false;
             }
         }
@@ -126,7 +131,9 @@ public class MainView  {
         return runGameView;
     }
 
-    /** Changes the screen that is currently showing. */
+    /**
+     * Changes the screen that is currently showing.
+     */
     public void setScreen(Screen screen) {
         mainJFrame.setVisible(false);
 
@@ -140,7 +147,9 @@ public class MainView  {
         mainJFrame.setVisible(true);
     }
 
-    /** Ends the program. */
+    /**
+     * Ends the program.
+     */
     public void closeGame() {
         mainJFrame.dispatchEvent(new WindowEvent(mainJFrame, WindowEvent.WINDOW_CLOSING));
     }

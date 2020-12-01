@@ -1,7 +1,6 @@
 package edu.csc413.tankgame.model;
-import edu.csc413.tankgame.view.MainView;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
+import edu.csc413.tankgame.view.MainView;
 
 public class PlayerTank extends Tank {
     public PlayerTank(String id, double x, double y, double angle) {
@@ -17,10 +16,8 @@ public class PlayerTank extends Tank {
             turnRight();
         } else if (MainView.pressLeft) {
             turnLeft();
-        } else if(MainView.shoot){
+        } else if (MainView.shoot) {
             //tryToFire(Shell);
         }
     }
-
-
 }

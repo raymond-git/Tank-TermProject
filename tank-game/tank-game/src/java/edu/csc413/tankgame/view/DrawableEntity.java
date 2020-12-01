@@ -6,7 +6,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 
-/** Represents an image that can be drawn on screen at a specific location and rotated at an angle. */
+/**
+ * Represents an image that can be drawn on screen at a specific location and rotated at an angle.
+ */
 class DrawableEntity {
     private final BufferedImage entityImage;
     private final AffineTransform affineTransform;
@@ -37,7 +39,9 @@ class DrawableEntity {
         return affineTransform;
     }
 
-    /** Updates this DrawableEntity's translation/rotation transform to match the provided coordinates and angle. */
+    /**
+     * Updates this DrawableEntity's translation/rotation transform to match the provided coordinates and angle.
+     */
     void setLocationAndAngle(double x, double y, double angle) {
         affineTransform.setToTranslation(x, y);
         affineTransform.rotate(angle, entityImage.getWidth() / 2.0, entityImage.getHeight() / 2.0);
