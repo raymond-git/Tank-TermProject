@@ -1,10 +1,14 @@
 package edu.csc413.tankgame.view;
 
+import edu.csc413.tankgame.model.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * MainView is the primary view that contains and controls individual screens (represented by the separate StartMenuView
@@ -16,8 +20,9 @@ public class MainView {
     public static boolean pressDown = false;
     public static boolean pressRight = false;
     public static boolean pressLeft = false;
-    public static boolean shoot = false;
+    public static boolean shooting = false;
     public static boolean readyToFire;
+
 
     static Rectangle bullet;
 
@@ -74,7 +79,7 @@ public class MainView {
         mainJFrame.add(mainPanel);
     }
 
-    KeyListener listeners = new KeyListener() {
+        KeyListener listeners = new KeyListener() {
 
         @Override
         public void keyTyped(KeyEvent event) {
@@ -94,17 +99,10 @@ public class MainView {
             } else if (key == KeyEvent.VK_ESCAPE) {
                 setScreen(MainView.Screen.END_MENU_SCREEN);
             } else if (key == KeyEvent.VK_SPACE) {
-                if (bullet == null) {
-                    readyToFire = true;
-                    if (readyToFire) {
-//                    getBulletY = 0;
-//                    getBulletX = 0;
-//                    bullet = new Rectangle(getBulletX, getBulletY, 3, 5);
-                        shoot = true;
-                    }
-                }
+
             }
         }
+
 
         @Override
         public void keyReleased(KeyEvent event) {
@@ -118,7 +116,7 @@ public class MainView {
             } else if (key == KeyEvent.VK_A) {
                 pressLeft = false;
             } else if (key == KeyEvent.VK_SPACE) {
-                shoot = false;
+                shooting = false;
             }
         }
     };

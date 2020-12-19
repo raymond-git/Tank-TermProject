@@ -1,4 +1,7 @@
 package edu.csc413.tankgame.model;
+import edu.csc413.tankgame.GameDriver;
+import edu.csc413.tankgame.view.RunGameView;
+
 
 public class DumbAiTank extends Tank {
     public DumbAiTank(String id, double x, double y, double angle) {
@@ -6,10 +9,10 @@ public class DumbAiTank extends Tank {
     }
 
     @Override
-    public void move(GameState gamestate) {
+    public void move(GameState gameState, RunGameView runGameView) {
+        shoot(gameState, runGameView);
         moveForward();
+        turnRightAI();
         turnRight();
-    }
+   }
 }
-
-

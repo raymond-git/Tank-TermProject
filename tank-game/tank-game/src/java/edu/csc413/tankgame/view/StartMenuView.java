@@ -70,6 +70,7 @@ public class StartMenuView extends JPanel {
         add(button);
     }
 
+
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(menuBackground, 0, 0, null);

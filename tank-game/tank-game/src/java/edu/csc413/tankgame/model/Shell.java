@@ -1,6 +1,7 @@
 package edu.csc413.tankgame.model;
 
 import edu.csc413.tankgame.view.MainView;
+import edu.csc413.tankgame.view.RunGameView;
 
 /**
  * Model class representing a shell that has been fired by a tank. A shell has a position and an angle, as well as a
@@ -14,15 +15,22 @@ public class Shell extends Entity {
 
     private static long uniqueId = 0L;
 
-    public Shell(double x, double y, double angle) {
+    public Shell( double x, double y, double angle) {
         super(getUniqueId(), x, y, angle);
     }
 
+    public double getXBound(){
+        return getX() + 24.0;
+    }
+
+
+    public double getYBound(){
+        return getY() + 24.0;
+    }
+
     @Override
-    public void move(GameState gamestate) {
-        if (MainView.shoot) {
+    public void move(GameState gameState, RunGameView runGameView) {
             moveForward();
-        }
     }
 
     private static String getUniqueId() {

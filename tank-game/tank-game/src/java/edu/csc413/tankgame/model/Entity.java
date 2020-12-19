@@ -1,14 +1,25 @@
 package edu.csc413.tankgame.model;
 
+import edu.csc413.tankgame.view.RunGameView;
+import edu.csc413.tankgame.view.StartMenuView;
+
+import java.awt.*;
+import java.util.ArrayList;
+
 public abstract class Entity {
+
     private static final String SHELL_ID_PREFIX = "shell-";
     private static final double MOVEMENT_SPEED = 4.0;
     // private static final double MOVEMENT_SPEED = 2.0;
     private static final double TURN_SPEED = Math.toRadians(3);
+
+
     private final String id;
     private double x;
     private double y;
     private double angle;
+    private boolean ShootPressed;
+
 
     public Entity(String id, double x, double y, double angle) {
         this.id = id;
@@ -33,7 +44,15 @@ public abstract class Entity {
         return angle;
     }
 
-    public abstract void move(GameState gamestate);
+    public double getXBound(){
+        return 0;
+    }
+
+    public double getYBound(){
+        return 0;
+    }
+
+    public abstract void move(GameState gameState, RunGameView runGameView);
 
     // TODO: The methods below are provided so you don't have to do the math for movement. However, note that they are
     // protected. You should not be calling these methods directly from outside the Tank class hierarchy. Instead,
@@ -43,11 +62,18 @@ public abstract class Entity {
     protected void moveForward() {
         x += MOVEMENT_SPEED * Math.cos(this.angle);
         y += MOVEMENT_SPEED * Math.sin(this.angle);
+        checkBorder();
     }
 
     protected void moveBackward() {
         x -= MOVEMENT_SPEED * Math.cos(angle);
         y -= MOVEMENT_SPEED * Math.sin(angle);
+        checkBorder();
+    }
+
+    protected void turnRightAI() {
+        x += MOVEMENT_SPEED * Math.cos(90);
+        y += MOVEMENT_SPEED * Math.cos(90);
     }
 
     protected void turnLeft() {
@@ -57,4 +83,17 @@ public abstract class Entity {
     protected void turnRight() {
         angle += TURN_SPEED;
     }
+
+    private void checkBorder() {
+        if (x < GameState.TANK_X_LOWER_BOUND) {
+            x = GameState.TANK_X_LOWER_BOUND;
+        } else if (x >= GameState.TANK_X_UPPER_BOUND) {
+            x = GameState.TANK_X_UPPER_BOUND;
+        } else if (y < GameState.TANK_Y_LOWER_BOUND) {
+            y = GameState.TANK_Y_LOWER_BOUND;
+        } else if (y >= GameState.TANK_Y_UPPER_BOUND) {
+            y = GameState.TANK_Y_UPPER_BOUND;
+        }
+    }
 }
+
