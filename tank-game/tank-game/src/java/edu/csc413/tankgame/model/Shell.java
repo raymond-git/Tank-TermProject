@@ -1,6 +1,4 @@
 package edu.csc413.tankgame.model;
-
-import edu.csc413.tankgame.view.MainView;
 import edu.csc413.tankgame.view.RunGameView;
 
 /**
@@ -12,7 +10,6 @@ import edu.csc413.tankgame.view.RunGameView;
 public class Shell extends Entity {
     private static final String SHELL_ID_PREFIX = "shell-";
     private static final double MOVEMENT_SPEED = 4.0;
-
     private static long uniqueId = 0L;
 
     public Shell( double x, double y, double angle) {

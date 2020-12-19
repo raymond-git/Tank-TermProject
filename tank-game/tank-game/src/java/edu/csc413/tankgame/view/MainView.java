@@ -1,14 +1,10 @@
 package edu.csc413.tankgame.view;
 
-import edu.csc413.tankgame.model.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * MainView is the primary view that contains and controls individual screens (represented by the separate StartMenuView
@@ -21,10 +17,6 @@ public class MainView {
     public static boolean pressRight = false;
     public static boolean pressLeft = false;
     public static boolean shooting = false;
-    public static boolean readyToFire;
-
-
-    static Rectangle bullet;
 
     /**
      * The different screens that can be shown.
@@ -102,7 +94,6 @@ public class MainView {
 
             }
         }
-
 
         @Override
         public void keyReleased(KeyEvent event) {

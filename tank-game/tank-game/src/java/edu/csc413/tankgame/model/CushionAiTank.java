@@ -33,6 +33,4 @@ public abstract class CushionAiTank extends Tank {
         }
         shoot(gameState,runGameView);
     }
-
-
 }
