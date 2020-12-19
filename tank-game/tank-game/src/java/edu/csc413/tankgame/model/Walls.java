@@ -33,7 +33,6 @@ public class Walls extends Entity {
         super(getUniqueId(), x, y, 0);
     }
 
-
     public static String getUniqueId() {
         return WALL_ID_PREFIX + uniqueId++;
     }

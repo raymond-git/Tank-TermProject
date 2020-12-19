@@ -194,16 +194,14 @@ public class GameDriver {
 
         for(WallImageInfo wallImage: WallImageInfo.readWalls()) {
             Walls wall =
-                    new Walls(
-                            wallImage.getX(),
-                            wallImage.getY());
-                            gameState.addEntity(wall);
-            runGameView.addDrawableEntity(
-                    wall.getId(),
-                    wallImage.getImageFile(),
-                    wallImage.getX(),
-                    wallImage.getY(),
-                    0);
+                    new Walls(wallImage.getX(), wallImage.getY());
+                        gameState.addEntity(wall);
+                        runGameView.addDrawableEntity(
+                             wall.getId(),
+                             wallImage.getImageFile(),
+                             wallImage.getX(),
+                             wallImage.getY(),
+                                 0);
         }
 
         Tank playerTank =
@@ -229,13 +227,6 @@ public class GameDriver {
                         RunGameView.AI_TANK_2_INITIAL_Y,
                         RunGameView.AI_TANK_2_INITIAL_ANGLE){
                 };
-
-
-//                        GameState.Wall_ID,
-//                        RunGameView.WALL_IMAGE_INITIAL_X,
-//                        RunGameView.WALL_IMAGE_INITIAL_Y,
-//                        RunGameView.WALL_IMAGE_INITIAL_ANGLE) {
-
 
         gameState.addEntity(playerTank);
         gameState.addEntity(aiTank);

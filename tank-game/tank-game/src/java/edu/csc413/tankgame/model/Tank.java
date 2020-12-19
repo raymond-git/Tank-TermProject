@@ -28,12 +28,6 @@ public abstract class Tank extends Entity {
                 getAngle());
     }
 
-//    @Override
-//    public void move(GameState gameState, RunGameView runGameView){
-//
-//    }
-
-
 
     // TODO: The methods below are provided so you don't have to do the math for movement. However, note that they are
     // protected. You should not be calling these methods directly from outside the Tank class hierarchy. Instead,
@@ -43,8 +37,6 @@ public abstract class Tank extends Entity {
     // The following methods will be useful for determining where a shell should be spawned when it
     // is created by this tank. It needs a slight offset so it appears from the front of the tank,
     // even if the tank is rotated. The shell should have the same angle as the tank.
-
-
 
 
     private double getShellX() {

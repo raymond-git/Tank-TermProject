@@ -18,7 +18,6 @@ public class PlayerTank extends Tank {
         } else if (MainView.pressLeft) {
             turnLeft();
         } else if (MainView.shooting) {
-            //shoot(gameState);
             shoot(gameState, runGameView);
       }
     }

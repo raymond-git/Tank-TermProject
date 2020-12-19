@@ -1,5 +1,4 @@
 package edu.csc413.tankgame.model;
-import edu.csc413.tankgame.GameDriver;
 import edu.csc413.tankgame.view.RunGameView;
 
 

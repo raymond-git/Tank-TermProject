@@ -46,7 +46,6 @@ public class GameState {
         for (int i = 0; i < entities.size(); i++) {
             while (entities.get(i).getId() == id) {
                 return entities.get(i);
-                //  entities.get(i).getId().equals(id);
             }
         }
         return entities.get(1);

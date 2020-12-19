@@ -23,7 +23,6 @@ public class Shell extends Entity {
         return getX() + 24.0;
     }
 
-
     public double getYBound(){
         return getY() + 24.0;
     }

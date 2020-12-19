@@ -1,10 +1,6 @@
 package edu.csc413.tankgame.model;
-
 import edu.csc413.tankgame.view.RunGameView;
-import edu.csc413.tankgame.view.StartMenuView;
 
-import java.awt.*;
-import java.util.ArrayList;
 
 public abstract class Entity {
 
@@ -13,13 +9,10 @@ public abstract class Entity {
     // private static final double MOVEMENT_SPEED = 2.0;
     private static final double TURN_SPEED = Math.toRadians(3);
 
-
     private final String id;
     private double x;
     private double y;
     private double angle;
-    private boolean ShootPressed;
-
 
     public Entity(String id, double x, double y, double angle) {
         this.id = id;
@@ -96,4 +89,3 @@ public abstract class Entity {
         }
     }
 }
-
